@@ -1,11 +1,21 @@
 import cv2
 import sys
 import pyttsx3
+import threading
+
+
+engine_lock = threading.Lock()
 
 s = 0
 if len(sys.argv) > 1:
     s = sys.argv[1]
 
+def speak_text(text):
+    engine = pyttsx3.init()  # Initialize the text-to-speech engine
+    with engine_lock:
+        engine.say(text)
+        engine.runAndWait()
+        
 colors = {}
 alive = True
 clicked_point = (-1, -1)  # Initialize the clicked point coordinates
@@ -58,10 +68,12 @@ while alive:
         print("threshold: ", threshold)
         dom_col = list(sorted_colors.items())[2]
         # if (10<colors['red']<234) and (10<colors['blue']<234) and ....:
-        if dom_col[1] > threshold or dom_col[1] == 255:
-            engine.say(dom_col[0])
-            engine.runAndWait()
-        # Reset the clicked_point to (-1, -1) to prevent continuous printing
+        if (dom_col[1] > threshold) or (dom_col[1] == 255):
+             text_to_speak = dom_col[0]
+             speak_thread = threading.Thread(target=speak_text, args=(text_to_speak,))
+             speak_thread.start()
+             
+        #   Reset the clicked_point to (-1, -1) to prevent continuous printing
         clicked_point = (-1, -1)
 source.release()
 cv2.destroyWindow(win_name)

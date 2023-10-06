@@ -1,3 +1,4 @@
 opencv-python
 black
 pyttsx3
+numpy
