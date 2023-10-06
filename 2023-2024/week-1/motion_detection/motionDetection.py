@@ -26,8 +26,6 @@ def beep_alarm():
         print("ALARM")
         winsound.Beep(2500, 1000)
     alarm = False
-
-
 while True:
     _, frame = cap.read()
     frame = imutils.resize(frame, width=500)
