@@ -1,3 +1,5 @@
+# Project: [3- Motion Detection Application](https://github.com/kodo-yousif/AI-Practical-Tasks/tree/main/2023-2024/week-1#3--motion-detection-application)
+
 import threading
 import winsound
 import cv2
