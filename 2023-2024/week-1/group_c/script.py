@@ -4,8 +4,6 @@ import threading
 import winsound
 import cv2
 import imutils
-import matplotlib.pyplot as plt
-import time
 import numpy as np
 
 cap = cv2.VideoCapture(0)
