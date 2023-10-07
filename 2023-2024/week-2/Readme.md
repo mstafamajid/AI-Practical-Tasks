@@ -112,7 +112,7 @@ move the vacuum to be on the dirt, the vacuum can not be moved to be placed over
 
 the board is random on each program run
 
-# 4. vacuum best-fs solution
+# 6. vacuum best-fs solution
 solve a vacuum search using best first search algorithm, and print the initial board and the steps to solution into a solution.txt file, and also print the over all cost of the solution, then show all the steps visually on the vacuum board. if there is no solution the board should be printed into solution.txt and put a text which says there is no solution because of obstacles.
 
 ## Requirements:
