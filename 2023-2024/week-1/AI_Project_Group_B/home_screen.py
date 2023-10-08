@@ -1,6 +1,7 @@
 import tkinter
 from turtle import Screen
 import project1 as project1
+import os
 
 screen = Screen()
 screen.setup(width=800, height=600)
@@ -47,6 +48,9 @@ button2.pack()
 button2.place(relx=0.5, rely=0.35, anchor=tkinter.CENTER)
 
 canvas.itemconfig(screen._bgpic, anchor="n") #must be   n, ne, e, se, s, sw, w, nw, or center
-screen.bgpic("./images/ai.gif")
+absolute_path = os.path.dirname(__file__)
+relative_path = "images/ai.gif"
+full_path = os.path.join(absolute_path, relative_path)
+screen.bgpic(full_path)
 
 screen.mainloop()
