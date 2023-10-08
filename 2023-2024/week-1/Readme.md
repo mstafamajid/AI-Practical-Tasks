@@ -130,3 +130,15 @@ Develop a program that provides auditory feedback based on the red colour intens
 - You can use another audio library Approved by supervisor
 
 <b><i>Note: Should not use libraries to perform main goals</i></b>
+
+## Folder Structure
+
+If you plan to submit your assignment using GitHub, please consider following the folder structure as mentioned below.
+week-1/
+├─ group_a/
+│ ├─ presentation/
+│ │ ├─ project_name.pptx
+│ ├─ app.py
+
+You have to include your project number and the project name as a comment in the top of your `app.py` file
+and link it to the readme file for example: [1- RGB Color Detection](https://github.com/kodo-yousif/AI-Practical-Tasks/tree/main/2023-2024/week-1#1--rgb-color-detection)
