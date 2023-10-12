@@ -1,3 +1,6 @@
+# Title: 5- Regional Movement Announcer
+# Link: https://github.com/RawandDev/AI-Practical-Tasks/tree/main/2023-2024/week-1#5--regional-movement-announcer
+
 import cv2
 import pyttsx3
 import threading
