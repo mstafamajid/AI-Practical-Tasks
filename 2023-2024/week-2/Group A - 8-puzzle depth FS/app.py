@@ -1,8 +1,10 @@
 import random
 import tkinter
-from board import EightPuzzleGUI  # Make sure you have the 'EightPuzzleGUI' class defined in 'board.py'
+from board import EightPuzzleGUI 
+from os import path# Make sure you have the 'EightPuzzleGUI' class defined in 'board.py'
 
-FILE_PATH="2023-2024\week-2\Group A - 8-puzzle depth FS\\solution.txt"
+FILE_PATH=path.abspath("2023-2024\week-2\Group A - 8-puzzle depth FS\\solution.txt")
+
 
 
 class PuzzleState:

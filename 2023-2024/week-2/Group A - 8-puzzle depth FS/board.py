@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
+from os import path
 
 
 
@@ -11,12 +12,11 @@ class EightPuzzleGUI:
         self.current_step = 0
 
         # Load images for numbers 1 to 8 and blank
-        self.images = [
-            PhotoImage(file=f"2023-2024/week-2/puzzle_board/assets/{i}.png")
+        self.images = [ PhotoImage(file= path.abspath(f"2023-2024/week-2/puzzle_board/assets/{i}.png"))
             for i in range(1, 9)
         ]
         self.images.append(
-            PhotoImage(file="2023-2024\week-2\Group A - 8-puzzle depth FS\\0.png")
+            PhotoImage(file=path.abspath("2023-2024\week-2\Group A - 8-puzzle depth FS\\0.png"))
         )
 
         # Initialize the puzzle board
