@@ -35,40 +35,12 @@ def identify_dominant_color(frame):
     upper_blue = np.array([130, 255, 255])
 
     # Create masks to isolate red, green, and blue regions
-    # mask_red = cv2.inRange(hsv_frame, lower_red, upper_red)
-    # mask_green = cv2.inRange(hsv_frame, lower_green, upper_green)
-    # mask_blue = cv2.inRange(hsv_frame, lower_blue, upper_blue)
-
-    # Create masks to isolate red, green, and blue regions
-    mask_red = np.logical_and.reduce((
-        lower_red[0] <= hsv_frame[:, :, 0],  # Hue
-        lower_red[1] <= hsv_frame[:, :, 1],  # Saturation
-        lower_red[2] <= hsv_frame[:, :, 2],  # Value
-        hsv_frame[:, :, 0] <= upper_red[0],  # Upper Hue
-        hsv_frame[:, :, 1] <= upper_red[1],  # Upper Saturation
-        hsv_frame[:, :, 2] <= upper_red[2]   # Upper Value
-    ))
-
-    mask_green = np.logical_and.reduce((
-        lower_green[0] <= hsv_frame[:, :, 0],  # Hue
-        lower_green[1] <= hsv_frame[:, :, 1],  # Saturation
-        lower_green[2] <= hsv_frame[:, :, 2],  # Value
-        hsv_frame[:, :, 0] <= upper_green[0],  # Upper Hue
-        hsv_frame[:, :, 1] <= upper_green[1],  # Upper Saturation
-        hsv_frame[:, :, 2] <= upper_green[2]   # Upper Value
-    ))
-
-    mask_blue = np.logical_and.reduce((
-        lower_blue[0] <= hsv_frame[:, :, 0],  # Hue
-        lower_blue[1] <= hsv_frame[:, :, 1],  # Saturation
-        lower_blue[2] <= hsv_frame[:, :, 2],  # Value
-        hsv_frame[:, :, 0] <= upper_blue[0],  # Upper Hue
-        hsv_frame[:, :, 1] <= upper_blue[1],  # Upper Saturation
-        hsv_frame[:, :, 2] <= upper_blue[2]   # Upper Value
-    ))    
+    mask_red = cv2.inRange(hsv_frame, lower_red, upper_red) # return an array
+    mask_green = cv2.inRange(hsv_frame, lower_green, upper_green)
+    mask_blue = cv2.inRange(hsv_frame, lower_blue, upper_blue)
 
     # Calculate the areas of red, green, and blue regions
-    area_red = np.count_nonzero(mask_red)
+    area_red = np.count_nonzero(mask_red) # returns an integer
     area_green = np.count_nonzero(mask_green)
     area_blue = np.count_nonzero(mask_blue)
 
@@ -108,8 +80,7 @@ while True:
     cv2.imshow("RGB Color Detection", frame)
 
     # Check for the key to announce the dominant color audibly
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord('a'):
+    if cv2.waitKey(1) == ord('a'):
         threading.Thread(target=announce_color, args=(dominant_color,)).start()
 
     # Check if the window is closed by the user to exit
