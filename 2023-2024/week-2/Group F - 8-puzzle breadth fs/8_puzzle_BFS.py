@@ -3,6 +3,14 @@ import random
 import tkinter as tk
 from tkinter import messagebox
 
+import os
+# Get the absolute path of the script being executed
+script_path = os.path.abspath(__file__)
+# Extract the directory containing the script
+script_directory = os.path.dirname (script_path)
+
+solution_path = os.path.join(script_directory,"solution.txt")
+
 # Create the main GUI window
 root = tk.Tk()
 root.title("8-Puzzle Solver by BFS")
@@ -90,20 +98,21 @@ def count_inversions(state):
                 inversions += 1
     return inversions
 
-def save_solution_to_file(initial_state, solution_path):
-    with open("2023-2024/week-2/Group F - 8-puzzle breadth fs/solution.txt", "w") as file:
+def save_solution_to_file(initial_state, path_solution):
+    
+    with open(solution_path, "w") as file:
         file.write("Initial Puzzle Board:\n")
         for i in range(0, 9, 3):
             file.write(" ".join(map(str, initial_state[i: i + 3])) + "\n")
 
-        if solution_path:
+        if path_solution:
             file.write("\nSteps to Solution:\n")
-            for step, state in enumerate(solution_path):
+            for step, state in enumerate(path_solution):
                 file.write(f"Step {step + 1}:\n")
                 for i in range(0, 9, 3):
                     file.write(" ".join(map(str, state[i: i + 3])) + "\n")
             file.write("\nOverall Cost of Solution: {}\n".format(
-                len(solution_path) - 1))
+                len(path_solution) - 1))
         else:
             file.write("\nNot Solvable!")
             messagebox.showerror("No Solution", "The puzzle is not solvable!")
@@ -133,7 +142,7 @@ def solve_puzzle():
                 step * 500, lambda state=state: update_initial_state(state))
         root.after((len(solution_path)) * 500, show_success_message)
     else:
-        show_nosolution_message
+        print("Not Solvable !")
 
 # Function to update the puzzle state and GUI
 def update_initial_state(new_state):
@@ -155,10 +164,10 @@ def start_puzzle_solving():
 initial_state = generate_random_puzzle()
 
 # Solve the puzzle using BFS
-solution_path = bfs(initial_state)
+path_solution= bfs(initial_state)
 
 # save to file and do solution
-save_solution_to_file(initial_state, solution_path)
+save_solution_to_file(initial_state, path_solution)
 # Update the GUI with the initial puzzle state
 update_gui()
 
