@@ -35,6 +35,9 @@ MANIFEST
 **/.DS_Store
 .DS_Store
 
+**/solution.txt
+solution.txt
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
