@@ -1,3 +1,6 @@
+# Title: 1- RGB Color Detection
+# Link: https://github.com/kodo-yousif/AI-Practical-Tasks/tree/main/2023-2024/week-1#1--rgb-color-detection
+
 import cv2
 import numpy as np
 import pyttsx3

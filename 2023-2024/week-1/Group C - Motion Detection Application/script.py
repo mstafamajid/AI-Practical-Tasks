@@ -1,9 +1,10 @@
+# Title: 3- Motion Detection Application
+# Link: https://github.com/kodo-yousif/AI-Practical-Tasks/tree/main/2023-2024/week-1#3--motion-detection-application
+
 import threading
 import winsound
 import cv2
 import imutils
-import matplotlib.pyplot as plt
-import time
 import numpy as np
 
 cap = cv2.VideoCapture(0)
