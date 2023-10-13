@@ -1,9 +1,12 @@
 import random
 import tkinter
 from board import EightPuzzleGUI 
-from os import path# Make sure you have the 'EightPuzzleGUI' class defined in 'board.py'
+import os# Make sure you have the 'EightPuzzleGUI' class defined in 'board.py'
 
-FILE_PATH=path.abspath("2023-2024\week-2\Group A - 8-puzzle depth FS\\solution.txt")
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+FILE_PATH=os.path.join(current_directory,"solution.txt")
+
 
 
 
