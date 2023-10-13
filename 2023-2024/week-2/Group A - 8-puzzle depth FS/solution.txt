@@ -1,190 +1,170 @@
 Initial board:
-5  3  1
-0  2  8
-7  6  4
-Step 1 (Up):
+6  0  7
+4  3  1
+5  2  8
+Step 1 (Left):
+0  6  7
+4  3  1
+5  2  8
+
+Step 2 (Down):
+4  6  7
 0  3  1
 5  2  8
-7  6  4
-
-Step 2 (Right):
-3  0  1
-5  2  8
-7  6  4
 
 Step 3 (Right):
-3  1  0
+4  6  7
+3  0  1
 5  2  8
-7  6  4
 
-Step 4 (Down):
-3  1  8
-5  2  0
-7  6  4
+Step 4 (Up):
+4  0  7
+3  6  1
+5  2  8
 
-Step 5 (Left):
-3  1  8
-5  0  2
-7  6  4
+Step 5 (Right):
+4  7  0
+3  6  1
+5  2  8
 
-Step 6 (Left):
-3  1  8
-0  5  2
-7  6  4
+Step 6 (Down):
+4  7  1
+3  6  0
+5  2  8
 
-Step 7 (Up):
-0  1  8
-3  5  2
-7  6  4
+Step 7 (Left):
+4  7  1
+3  0  6
+5  2  8
 
-Step 8 (Right):
-1  0  8
-3  5  2
-7  6  4
+Step 8 (Up):
+4  0  1
+3  7  6
+5  2  8
 
-Step 9 (Right):
-1  8  0
-3  5  2
-7  6  4
+Step 9 (Left):
+0  4  1
+3  7  6
+5  2  8
 
 Step 10 (Down):
-1  8  2
-3  5  0
-7  6  4
+3  4  1
+0  7  6
+5  2  8
 
-Step 11 (Left):
-1  8  2
-3  0  5
-7  6  4
+Step 11 (Right):
+3  4  1
+7  0  6
+5  2  8
 
-Step 12 (Left):
-1  8  2
-0  3  5
-7  6  4
+Step 12 (Right):
+3  4  1
+7  6  0
+5  2  8
 
-Step 13 (Down):
-1  8  2
-7  3  5
-0  6  4
+Step 13 (Up):
+3  4  0
+7  6  1
+5  2  8
 
-Step 14 (Right):
-1  8  2
-7  3  5
-6  0  4
+Step 14 (Left):
+3  0  4
+7  6  1
+5  2  8
 
-Step 15 (Right):
-1  8  2
-7  3  5
-6  4  0
+Step 15 (Down):
+3  6  4
+7  0  1
+5  2  8
 
-Step 16 (Up):
-1  8  2
-7  3  0
-6  4  5
+Step 16 (Down):
+3  6  4
+7  2  1
+5  0  8
 
 Step 17 (Left):
-1  8  2
-7  0  3
-6  4  5
+3  6  4
+7  2  1
+0  5  8
 
-Step 18 (Left):
-1  8  2
-0  7  3
-6  4  5
-
-Step 19 (Down):
-1  8  2
-6  7  3
-0  4  5
-
-Step 20 (Right):
-1  8  2
-6  7  3
-4  0  5
-
-Step 21 (Up):
-1  8  2
-6  0  3
-4  7  5
-
-Step 22 (Right):
-1  8  2
-6  3  0
-4  7  5
-
-Step 23 (Up):
-1  8  0
-6  3  2
-4  7  5
-
-Step 24 (Left):
-1  0  8
-6  3  2
-4  7  5
-
-Step 25 (Down):
-1  3  8
-6  0  2
-4  7  5
-
-Step 26 (Right):
-1  3  8
-6  2  0
-4  7  5
-
-Step 27 (Up):
-1  3  0
-6  2  8
-4  7  5
-
-Step 28 (Left):
-1  0  3
-6  2  8
-4  7  5
-
-Step 29 (Down):
-1  2  3
-6  0  8
-4  7  5
-
-Step 30 (Left):
-1  2  3
-0  6  8
-4  7  5
-
-Step 31 (Down):
-1  2  3
-4  6  8
-0  7  5
-
-Step 32 (Right):
-1  2  3
-4  6  8
-7  0  5
-
-Step 33 (Right):
-1  2  3
-4  6  8
-7  5  0
-
-Step 34 (Up):
-1  2  3
-4  6  0
+Step 18 (Up):
+3  6  4
+0  2  1
 7  5  8
 
-Step 35 (Left):
+Step 19 (Right):
+3  6  4
+2  0  1
+7  5  8
+
+Step 20 (Right):
+3  6  4
+2  1  0
+7  5  8
+
+Step 21 (Up):
+3  6  0
+2  1  4
+7  5  8
+
+Step 22 (Left):
+3  0  6
+2  1  4
+7  5  8
+
+Step 23 (Left):
+0  3  6
+2  1  4
+7  5  8
+
+Step 24 (Down):
+2  3  6
+0  1  4
+7  5  8
+
+Step 25 (Right):
+2  3  6
+1  0  4
+7  5  8
+
+Step 26 (Right):
+2  3  6
+1  4  0
+7  5  8
+
+Step 27 (Up):
+2  3  0
+1  4  6
+7  5  8
+
+Step 28 (Left):
+2  0  3
+1  4  6
+7  5  8
+
+Step 29 (Left):
+0  2  3
+1  4  6
+7  5  8
+
+Step 30 (Down):
+1  2  3
+0  4  6
+7  5  8
+
+Step 31 (Right):
 1  2  3
 4  0  6
 7  5  8
 
-Step 36 (Down):
+Step 32 (Down):
 1  2  3
 4  5  6
 7  0  8
 
-Step 37 (Right):
+Step 33 (Right):
 1  2  3
 4  5  6
 7  8  0
 
-Cost: 37 steps to reach the goal
+Cost: 33 steps to reach the goal
