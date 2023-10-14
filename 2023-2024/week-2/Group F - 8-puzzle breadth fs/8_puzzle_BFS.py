@@ -84,20 +84,6 @@ def generate_random_puzzle():
     random.shuffle(puzzle)
     return puzzle
 
-# Function to check if a puzzle is solvable
-def is_solvable(state):
-    inversions = count_inversions(state)
-    return inversions % 2 == 0
-
-# Function to calculate the number of inversions in a state
-def count_inversions(state):
-    inversions = 0
-    for i in range(8):
-        for j in range(i + 1, 9):
-            if state[i] > state[j] and state[i] != 0 and state[j] != 0:
-                inversions += 1
-    return inversions
-
 def save_solution_to_file(initial_state, path_solution):
     
     with open(solution_path, "w") as file:
