@@ -160,7 +160,7 @@ print(get_board())
 
 
 # Specify the filename
-filename = r"2023-2024\week-2\GroupC-Vacuum-cleaner-breadth-fs\solution.txt"
+filename = r"2023-2024\week-2\Group C - vacuum breadth FS\solution.txt"
 
 # Get the absolute path of the current directory and concatenate with the filename
 file_path = os.path.join(os.getcwd(), filename)
