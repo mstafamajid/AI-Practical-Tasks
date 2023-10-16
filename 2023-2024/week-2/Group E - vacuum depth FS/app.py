@@ -1,3 +1,4 @@
+import os
 import time
 import threading
 from tkinter import messagebox
@@ -86,7 +87,13 @@ for move in moves:
 
 
 # Writing result to solution.txt file
-file_path = "C:\\Users\\HB Laptop Store\\Desktop\\AI-Practical-Tasks\\2023-2024\\week-2\\Group E - vacuum depth FS\\solution.txt"
+
+# Get the absolute path of the script being executed
+script_path = os.path.abspath(__file__)
+# Extract the directory containing the script
+script_directory = os.path.dirname (script_path)
+
+file_path = os.path.join(script_directory,"solution.txt")
 
 with open(file_path, "w") as file:
     file.write("Initial Board:\n")
