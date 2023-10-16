@@ -87,12 +87,8 @@ for move in moves:
 
 
 # Writing result to solution.txt file
-
-# Get the absolute path of the script being executed
 script_path = os.path.abspath(__file__)
-# Extract the directory containing the script
 script_directory = os.path.dirname (script_path)
-
 file_path = os.path.join(script_directory,"solution.txt")
 
 with open(file_path, "w") as file:
