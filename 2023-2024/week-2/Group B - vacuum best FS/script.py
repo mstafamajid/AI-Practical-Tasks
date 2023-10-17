@@ -1,7 +1,7 @@
 import os
 import time
 import threading
-from tkinter import messagebox
+import heapq
 from vacuum_board.vacuum import *
 
 # Just setting the board up
@@ -10,41 +10,40 @@ board_thread = threading.Thread(target=board)
 board_thread.start()
 time.sleep(2)  # give some time for GUI startup and initialization
 
-# Depth First Search Algorthim
-# To be studied
-def find_shortest_path(board):
-    def is_in_board(x, y):
-        return 0 <= x < len(board) and 0 <= y < len(board[0])
+def find_shortest_path(grid):
+    def is_valid(x, y):
+        return 0 <= x < len(grid) and 0 <= y < len(grid[0])
 
-    def dfs(x, y, path):
-        if not is_in_board(x, y) or board[x][y] == 0 or visited[x][y]:
-            return
+    visited = [[False for _ in range(len(grid[0]))] for _ in range(len(grid))]
+    start_x, start_y = get_vacuum_pos()
+    dest_x, dest_y = get_dirt_pos()
 
-        path.append((x, y))
+    if start_x is None or not is_valid(dest_x, dest_y):
+        return None
+
+    priority_queue = [(0, start_x, start_y, [])]  # (estimated cost, x, y, path)
+    heapq.heapify(priority_queue)
+
+    while priority_queue:
+        est_cost, x, y, path = heapq.heappop(priority_queue)
+
+        if visited[x][y]:
+            continue
+
         visited[x][y] = True
+        path.append((x, y))
 
-        if board[x][y] == 5:  # Destination
-            nonlocal shortest_path
-            if shortest_path is None or len(path) < len(shortest_path):
-                shortest_path = path.copy()
+        if (x, y) == (dest_x, dest_y):
+            return path
 
-        # Try moving in all four directions: up, down, left, right
-        dfs(x - 1, y, path)  # Top
-        dfs(x + 1, y, path)  # Bottom
-        dfs(x, y - 1, path)  # Left
-        dfs(x, y + 1, path)  # Right
+        # Generate all possible next moves
+        moves = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
+        for new_x, new_y in moves:
+            if is_valid(new_x, new_y) and not visited[new_x][new_y] and grid[new_x][new_y] != 0:
+                new_est_cost = abs(new_x - dest_x) + abs(new_y - dest_y)  # Manhattan distance
+                heapq.heappush(priority_queue, (new_est_cost, new_x, new_y, path[:]))
 
-        # Backtrack
-        path.pop()
-        visited[x][y] = False
-
-    visited = [[False for _ in range(len(board[0]))] for _ in range(len(board))]
-    shortest_path = None
-
-    vacuum_x, vacuum_y = get_vacuum_pos()
-    dfs(vacuum_x, vacuum_y, [])
-    return shortest_path
-
+    return None
 
 board = get_board()
 shortest_path = find_shortest_path(board)
@@ -74,7 +73,6 @@ if shortest_path:
     print("Vacuum Movement:")
     print(moves)
 else:
-    messagebox.showinfo("No Solution", "There is no solution because of the obstacles")
     quit()
 
 # Performing the moves
