@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Permutation Calculator</title>
+</head>
+<body>
+    <h1>Permutation Calculator</h1>
+    <form method="POST">
+        <label for="n">n:</label>
+        <input type="text" name="n" id="n" required>
+        <br>
+        <label for "r">r:</label>
+        <input type="text" name="r" id="r" required>
+        <br>
+        <input type="submit" value="Calculate">
+    </form>
+    {% if result is not none %}
+        {% if result == 0 %}
+            <p style="color: red;">Invalid input: r should be less than or equal to n.</p>
+        {% else %}
+            <p style="color: green;">P({n}, {r}) = {{ result }}</p>
+        {% endif %}
+    {% endif %}
+    <a href="/permutation_table">View Permutation Table</a>
+</body>
+</html>

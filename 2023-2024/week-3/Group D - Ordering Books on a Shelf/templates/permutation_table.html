@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Permutation Table</title>
+</head>
+<body>
+    <h1>Permutation Table</h1>
+    <table>
+        <tr>
+            <th>n</th>
+            <th>r</th>
+            <th>Result</th>
+        </tr>
+        {% for entry in table_data %}
+            <tr>
+                <td>{{ entry[0] }}</td>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Back to Permutation Calculator</a>
+</body>
+</html>
