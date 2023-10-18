@@ -34,7 +34,7 @@ def get_random_board(vacuum = False, dirt = False, obstacles = False ):
 	if obstacles:
 		obs = obstacles
 	else:
-		len = random.randint(1, 10)
+		len = random.randint(3, 10)
 		obs = [1 for _ in range(len)]
 		for i in range(len):
 			rand = random.randint(0, 35)
