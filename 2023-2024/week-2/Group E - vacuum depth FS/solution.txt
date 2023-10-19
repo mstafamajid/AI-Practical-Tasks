@@ -1,1 +1,21 @@
-temp
+Initial Board:
+1 1 1 1 1 1 
+0 1 10 1 1 1 
+0 1 1 5 1 1 
+1 1 1 0 1 1 
+1 1 1 1 1 1 
+1 1 1 0 1 1 
+
+Movement Order:
+['bottom', 'right']
+
+Final Board:
+1 1 1 1 1 1 
+0 1 1 1 1 1 
+0 1 1 10 1 1 
+1 1 1 0 1 1 
+1 1 1 1 1 1 
+1 1 1 0 1 1 
+
+Number of steps: 2
+Overall cost: 1
