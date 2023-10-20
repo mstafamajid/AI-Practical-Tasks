@@ -2,23 +2,29 @@
 <html>
 <head>
     <title>Permutation Table</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Permutation Table</h1>
-    <table>
-        <tr>
-            <th>n</th>
-            <th>r</th>
-            <th>Result</th>
-        </tr>
-        {% for entry in table_data %}
+<body class="container">
+    <h1 class="mt-5">Permutation Table</h1>
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="thead-dark">
             <tr>
-                <td>{{ entry[0] }}</td>
-                <td>{{ entry[1] }}</td>
-                <td>{{ entry[2] }}</td>
+                <th>n</th>
+                <th>r</th>
+                <th>Result</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for entry in table_data %}
+                <tr>
+                    <td>{{ entry[0] }}</td>
+                    <td>{{ entry[1] }}</td>
+                    <td>{{ entry[2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <a href="/">Back to Permutation Calculator</a>
+    <a href="/" class="btn btn-secondary mt-3">Back to Permutation Calculator</a>
 </body>
 </html>
