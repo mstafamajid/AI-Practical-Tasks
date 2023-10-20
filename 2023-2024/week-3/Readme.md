@@ -74,32 +74,46 @@ total books: 10, group size: 4, solution: 5040
 - the solution number should be in different color comparing the other colors
 
 
-# 4.
+# Initial A* BOARD
+![Board](board.png)
 
-## example: 
 
-## Requirements:
-- 
+# 4. A* path finder ( Manhattan distance )
+Find the path from (S) to (G) using A* algorithm associated with (Manhattan distance) algorithm,
+the app should display the initial board
 
-## Tools/Libraries Suggested:
-- 
+the board shows the nodes ( S, A, C ...etc ) and their cost which (Manhattan distance) is used to find the cost of each node
 
-# 5.
-
-## example:
+after finding the path open another windows and show the solution paths in order as shown in the lectures 
 
 ## Requirements:
-- 
+- Initial board is the paper attached
+- Use the (Manhattan distance) to find each nodes cost
+- show the solution paths in order as shown in the lectures 
 
-## Tools/Libraries Suggested:
-- 
+# 5. A* path finder ( Euclidean distance )
+Find the path from (S) to (G) using A* algorithm associated with (Euclidean distance) algorithm,
+the app should display the initial board
 
-# 6.
+the board shows the nodes ( S, A, C ...etc ) and their cost which (Euclidean distance) is used to find the cost of each node
 
-## example:
+after finding the path open another windows and show the solution paths in order as shown in the lectures 
 
 ## Requirements:
-- 
+- Initial board is the paper attached
+- Use the (Euclidean distance) to find each nodes cost
+- show the solution paths in order as shown in the lectures 
 
-## Tools/Libraries Suggested:
-- 
+# 6. A* path finder ( Chebyshev distance )
+Find the path from (S) to (G) using A* algorithm associated with (Chebyshev distance) algorithm,
+the app should display the initial board
+
+the board shows the nodes ( S, A, C ...etc ) and their cost which (Chebyshev distance) is used to find the cost of each node
+
+after finding the path open another windows and show the solution paths in order as shown in the lectures 
+
+## Requirements:
+- Initial board is the paper attached
+- Use the (Chebyshev distance) to find each nodes cost
+- show the solution paths in order as shown in the lectures 
+
