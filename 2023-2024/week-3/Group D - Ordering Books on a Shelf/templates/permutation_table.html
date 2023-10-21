@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Permutation Table</title>
     <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body class="container">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .highlight-green {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body class="container">
     <h1 class="mt-5">Permutation Table</h1>
     <table class="table table-bordered table-striped mt-3">
-        <thead class="thead-dark">
-            <tr>
-                <th>n</th>
-                <th>r</th>
-                <th>Result</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in table_data %}
-                <tr>
-                    <td>{{ entry[0] }}</td>
-                    <td>{{ entry[1] }}</td>
-                    <td>{{ entry[2] }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
+      <thead class="thead-dark"></thead>
+      <tbody>
+        {% for entry in table_data %}
+        <tr>
+          {% for item in entry %} {% if loop.last %}
+          <td class="highlight-green">{{item}}</td>
+          {% else %}
+          <td>{{item}}</td>
+          {% endif %} {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
-    <a href="/" class="btn btn-secondary mt-3">Back to Permutation Calculator</a>
-</body>
+    <div class="pagination mt-3">
+      {% for p in range(1, total_pages + 1) %}
+      <a
+        class="btn btn-secondary"
+        href="/permutation_table?page={{ p }}&per_page={{ per_page }}"
+        >{{ p }}</a
+      >
+      {% endfor %}
+    </div>
+    <a href="/" class="btn btn-secondary mt-3"
+      >Back to Permutation Calculator</a
+    >
+  </body>
 </html>
