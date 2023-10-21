@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import Tk
 from app import Project3
 
-
-
 window = Tk()
 window.geometry("800x500")
 
@@ -137,21 +135,3 @@ entry.grid( row = 0, column = 1, pady = 2)
 frame.grid(row=0, column=0)
 
 window.mainloop()
-
-
-
-# import tkinter as tk
-# from tkinter import Button, PhotoImage
-
-# # Create the main window
-# root = tk.Tk()
-# root.title("Icon Button Demo")
-
-# # Load the image
-# icon = PhotoImage(file="icon.png")
-
-# # Create a button with the image
-# button = Button(root, image=icon, text="Click Me", compound="left", command=lambda: print("Button clicked!"))
-# button.pack(pady=20)
-
-# root.mainloop()
