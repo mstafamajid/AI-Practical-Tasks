@@ -15,7 +15,6 @@ class Project3:
             matrix = [[0] * (len( words[words_count] ) + 1) for _ in range(len(self.input) + 1)]
 
             row = 1
-            
             for row in range(1, len(matrix)):
                 for column in range(1, len(matrix[1])):
                     if self.input[row - 1] == words[words_count][column - 1]:
