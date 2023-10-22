@@ -8,7 +8,7 @@ class Words:
         "illumination", "illuminate", "illuminator", "illumine", "illusory", "illustrious", "illusion", "illustrative",
         "resonate" "resonator", "resonant", "resound", "resonance", "resonantly", "resonating",
         "journey", "journeyman", "journeyed", "journeyer", "journal", "journalist", "journaled", "journaling",
-        "zebra", "stone"
+        "zebra", "stone","race", "varareo"
         ]
 
         return wordList
