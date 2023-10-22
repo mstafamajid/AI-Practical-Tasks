@@ -86,8 +86,17 @@ def submit():
                 if word[3][row][column] == 0:
                     create_text_widget(table_frame, row + 1, column + 1, 3, 1, word[3][row][column], "green", "white")
                     break
-                
+    
+
+    frame3 = Frame(window2)
+    table = Text(frame3, wrap=CHAR,  bg="black", fg="white")
+    table.config(font=5)
+    table.tag_config('center', justify='center')
+    table.insert(INSERT, f"The number of matcher words are {word[4][::-1]}")
+    table.pack()
+
     frame2.pack()
+    frame3.pack()
 
 
 
