@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from aStar import Graph
 
 app = Flask(__name__)
 
@@ -12,18 +13,24 @@ def getId():
 @app.route("/", methods=["GET"])
 def index():
     nodes = {
-        "s": {"row": 0, "col": 2, "cost": 99},
+        "s": {"row": 0, "col": 1, "cost": 99},
         "a": {"row": 2, "col": 0, "cost": 99},
-        "b": {"row": 2, "col": 1, "cost": 99},
-        "c": {"row": 2, "col": 3, "cost": 99},
-        "e": {"row": 4, "col": 1, "cost": 99},
-        "d": {"row": 4, "col": 2, "cost": 99},
-        "f": {"row": 5, "col": 2, "cost": 99},
-        "g": {"row": 6, "col": 0, "cost": 99},
+        "b": {"row": 2, "col": 2, "cost": 99},
+        "c": {"row": 4, "col": 1, "cost": 99},
+        "g": {"row": 4, "col": 3, "cost": 99},
     }
 
-    # Finding the real heuristic values (cost:99)
-    # using Chebyshev distance
+    # g(n)
+    edges = {
+        "s-a":6,
+        "s-b":6,
+        "a-c":4,
+        "b-c":4,
+        "c-g":2
+    }
+
+    # ============================
+    # Part 1: using Chebyshev distance
     goal = nodes["g"]
     goal_coordinates = (goal["row"], goal["col"])
     for node_name, node_data in nodes.items():
@@ -37,20 +44,8 @@ def index():
         # Update the "cost" attribute for the node with the Chebyshev distance
         nodes[node_name]["cost"] = chebyshev_distance
 
-    # g(n)
-    edges = {
-        "s-a":6,
-        "s-b":5,
-        "s-c":10,
-        "a-e":6,
-        "b-e":6,
-        "b-d":7,
-        "c-d":6,
-        "e-f":4,
-        "d-f":6,
-        "f-g":3
-    }
-
+    # ==============================
+    # Part 2: Generate Tree
     def generate_tree(nodes, edges, start_node):
         def tree(node, cost_so_far):
             node_info = nodes[node]
@@ -73,32 +68,29 @@ def index():
             }
 
         return tree(start_node, 0)
-    
 
     start_node = "s"
     solutionEdges = generate_tree(nodes, edges, start_node)
 
-    def find_best_path(tree):
-        if not tree["children"]:
-            label = tree["label"]
-            return [label]
+    # ===========================================
+    # Part 3: A* Algorithim, finding bestPath
+    adjacency_list = {}
+    heuristics = {}
 
-        best_path = None
-        lowest_cost = float("inf")
+    for node in nodes:
+        node_name = node.upper()
+        neighbors = []
+        
+        for edge, cost in edges.items():
+            if edge.startswith(node + "-") or edge.endswith("-" + node):
+                other_node = edge.replace(node, "").replace("-", "")
+                neighbors.append((other_node.upper(), cost))
+        
+        adjacency_list[node_name] = neighbors
+        heuristics[node_name] = abs(nodes[node]['row'] - nodes['g']['row']) + abs(nodes[node]['col'] - nodes['g']['col'])
 
-        for child in tree["children"]:
-            path = find_best_path(child)
-            if path:
-                # Extract the cost from the label
-                cost = int(path[0].split()[-1].split('-')[0])
-                if cost < lowest_cost:
-                    lowest_cost = cost
-                    best_path = path
-        if best_path:
-            label = tree["label"]
-            return [label] + best_path
-
-    bestPath = find_best_path(solutionEdges)
+    graph1 = Graph(adjacency_list, heuristics)
+    bestPath = graph1.a_star_algorithm('S', 'G')
 
     return render_template("index.html", nodes=nodes, edges=edges, solutionEdges=solutionEdges, bestPath=bestPath)
 

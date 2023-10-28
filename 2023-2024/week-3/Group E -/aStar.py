@@ -76,13 +76,12 @@ adjacency_list = {
 }
 
 heuristics = {
-    'S': 6,
-    'A': 4,
-    'B': 4,
+    'S': 4,
+    'A': 3,
+    'B': 2,
     'C': 2,
     'G': 0
 }
 
-graph1 = Graph(adjacency_list, heuristics)
-
-graph1.a_star_algorithm('S', 'G')
+# graph1 = Graph(adjacency_list, heuristics)
+# graph1.a_star_algorithm('S', 'G')
