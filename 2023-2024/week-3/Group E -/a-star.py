@@ -1,72 +1,118 @@
-import heapq
+from collections import deque
 
-# Heuristic value of each node
-nodes = {
-        "s": 6,
-        "a": 4,
-        "b": 4,
-        "c": 4,
-        "e": 2,
-        "d": 2,
-        "f": 2,
-        "g": 0,
-    }
+class Graph:
+    def __init__(self, adjacency_list, heuristics):
+        self.adjacency_list = adjacency_list
+        self.heuristics = heuristics
 
-# Cost to move from a node to its connected node
-edges = {
-    ("s", "a"): 6,
-    ("s", "b"): 5,
-    ("s", "c"): 10,
-    ("a", "e"): 6,
-    ("b", "e"): 6,
-    ("b", "d"): 7,
-    ("c", "d"): 6,
-    ("e", "f"): 4,
-    ("d", "f"): 6,
-    ("f", "g"): 3,
+    def get_neighbors(self, v):
+        return self.adjacency_list[v]
+
+    def h(self, n):
+        return self.heuristics[n]
+
+    def a_star_algorithm(self, start_node, stop_node):
+        # open_list is a list of nodes which have been visited, but who's neighbors
+        # haven't all been inspected, starts off with the start node
+        # closed_list is a list of nodes which have been visited
+        # and who's neighbors have been inspected
+        open_list = set([start_node])
+        closed_list = set([])
+
+        # g contains current distances from start_node to all other nodes
+        # the default value (if it's not found in the map) is +infinity
+        g = {}
+
+        g[start_node] = 0
+
+        # parents contains an adjacency map of all nodes
+        parents = {}
+        parents[start_node] = start_node
+
+        while len(open_list) > 0:
+            n = None
+
+            # find a node with the lowest value of f() - evaluation function
+            for v in open_list:
+                if n == None or g[v] + self.h(v) < g[n] + self.h(n):
+                    n = v;
+
+            if n == None:
+                print('Path does not exist!')
+                return None
+
+            # if the current node is the stop_node
+            # then we begin reconstructin the path from it to the start_node
+            if n == stop_node:
+                reconst_path = []
+
+                while parents[n] != n:
+                    reconst_path.append(n)
+                    n = parents[n]
+
+                reconst_path.append(start_node)
+
+                reconst_path.reverse()
+
+                print('Path found: {}'.format(reconst_path))
+                return reconst_path
+
+            # for all neighbors of the current node do
+            for (m, weight) in self.get_neighbors(n):
+                # if the current node isn't in both open_list and closed_list
+                # add it to open_list and note n as it's parent
+                if m not in open_list and m not in closed_list:
+                    open_list.add(m)
+                    parents[m] = n
+                    g[m] = g[n] + weight
+
+                # otherwise, check if it's quicker to first visit n, then m
+                # and if it is, update parent data and g data
+                # and if the node was in the closed_list, move it to open_list
+                else:
+                    if g[m] > g[n] + weight:
+                        g[m] = g[n] + weight
+                        parents[m] = n
+
+                        if m in closed_list:
+                            closed_list.remove(m)
+                            open_list.add(m)
+
+            # remove n from the open_list, and add it to closed_list
+            # because all of his neighbors were inspected
+            open_list.remove(n)
+            closed_list.add(n)
+
+        print('Path does not exist!')
+        return None
+    
+# Define a more complex adjacency list and heuristics
+adjacency_list = {
+    'A': [('B', 3), ('C', 6), ('D', 10)],
+    'B': [('E', 4), ('F', 8)],
+    'C': [('G', 5)],
+    'D': [('H', 7)],
+    'E': [('I', 2)],
+    'F': [('I', 6)],
+    'G': [('I', 4)],
+    'H': [('I', 3)],
+    'I': []
 }
 
-start_node = 's'
-goal_node = 'g'
+heuristics = {
+    'A': 12,
+    'B': 9,
+    'C': 8,
+    'D': 7,
+    'E': 6,
+    'F': 5,
+    'G': 4,
+    'H': 3,
+    'I': 0  # Setting the heuristic for the goal node to 0
+}
 
-def astar(nodes, edges, start, goal):
-    open_list = []  # Priority queue for nodes to be evaluated
-    came_from = {}  # Dictionary to store the parent node of each node
-    g_score = {node: float('inf') for node in nodes}  # Cost from start along best path
-    g_score[start] = 0
-    f_score = {node: float('inf') for node in nodes}  # Estimated total cost from start to goal through node
-    f_score[start] = nodes[start]
+# Create the Graph instance with adjacency list and heuristics
+graph1 = Graph(adjacency_list, heuristics)
 
-    # Push the start node into the priority queue
-    heapq.heappush(open_list, (f_score[start], start))
-
-    while open_list:
-        current = heapq.heappop(open_list)[1]
-
-        if current == goal:
-            # Reconstruct the path from goal to start
-            path = []
-            while current in came_from:
-                path.insert(0, current)
-                current = came_from[current]
-            path.insert(0, start)
-            return path
-
-        for neighbor in nodes:
-            if (current, neighbor) in edges:
-                tentative_g_score = g_score[current] + edges[(current, neighbor)]
-                if tentative_g_score < g_score[neighbor]:
-                    came_from[neighbor] = current
-                    g_score[neighbor] = tentative_g_score
-                    f_score[neighbor] = g_score[neighbor] + nodes[neighbor]
-                    if neighbor not in [node[1] for node in open_list]:
-                        heapq.heappush(open_list, (f_score[neighbor], neighbor))
-
-    # If no path is found, return None
-    return None
-
-path = astar(nodes, edges, start_node, goal_node)
-if path:
-    print("A* Path:", " -> ".join(path))
-else:
-    print("No path found.")
+# Call the A* algorithm
+graph1.a_star_algorithm('A', 'I')
