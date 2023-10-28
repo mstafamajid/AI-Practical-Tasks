@@ -1,5 +1,3 @@
-from collections import deque
-
 class Graph:
     def __init__(self, adjacency_list, heuristics):
         self.adjacency_list = adjacency_list
@@ -16,8 +14,10 @@ class Graph:
         closed_list = set([])
 
         g = {}
+        h_values = {}
 
         g[start_node] = 0
+        h_values[start_node] = self.heuristics[start_node]
 
         parents = {}
         parents[start_node] = start_node
@@ -26,25 +26,23 @@ class Graph:
             n = None
 
             for v in open_list:
-                if n == None or g[v] + self.h(v) < g[n] + self.h(n):
-                    n = v;
+                if n is None or (g[v] + h_values[v]) < (g[n] + h_values[n]):
+                    n = v
 
-            if n == None:
+            if n is None:
                 print('Path does not exist!')
                 return None
 
             if n == stop_node:
                 reconst_path = []
-
                 while parents[n] != n:
-                    reconst_path.append(n)
+                    reconst_path.append(f"{n} {g[n]}-{h_values[n]}-{g[n] + h_values[n]}")
                     n = parents[n]
 
-                reconst_path.append(start_node)
-
+                reconst_path.append(f"{start_node} 0-{h_values[start_node]}-{h_values[start_node]}")
                 reconst_path.reverse()
 
-                print('Path found: {}'.format(reconst_path))
+                print('Path found:', reconst_path)
                 return reconst_path
 
             for (m, weight) in self.get_neighbors(n):
@@ -52,6 +50,7 @@ class Graph:
                     open_list.add(m)
                     parents[m] = n
                     g[m] = g[n] + weight
+                    h_values[m] = self.heuristics[m]
 
                 else:
                     if g[m] > g[n] + weight:
@@ -69,29 +68,21 @@ class Graph:
         return None
     
 adjacency_list = {
-    'A': [('B', 3), ('C', 6), ('D', 10)],
-    'B': [('E', 4), ('F', 8)],
-    'C': [('G', 5)],
-    'D': [('H', 7)],
-    'E': [('I', 2)],
-    'F': [('I', 6)],
-    'G': [('I', 4)],
-    'H': [('I', 3)],
-    'I': []
+    'S': [('A', 6), ('B', 6)],
+    'A': [('S', 6), ('C', 4)],
+    'B': [('S', 6), ('C', 4)],
+    'C': [('A', 4), ('B', 4),('G', 2)],
+    'G': [('C', 2)]
 }
 
 heuristics = {
-    'A': 12,
-    'B': 9,
-    'C': 8,
-    'D': 7,
-    'E': 6,
-    'F': 5,
-    'G': 4,
-    'H': 3,
-    'I': 0
+    'S': 6,
+    'A': 4,
+    'B': 4,
+    'C': 2,
+    'G': 0
 }
 
 graph1 = Graph(adjacency_list, heuristics)
 
-graph1.a_star_algorithm('A', 'I')
+graph1.a_star_algorithm('S', 'G')
