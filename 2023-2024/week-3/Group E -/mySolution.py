@@ -51,8 +51,8 @@ def index():
         "f-g":3
     }
 
-    def generate_astar_tree(nodes, edges, start_node):
-        def astar_tree(node, cost_so_far):
+    def generate_tree(nodes, edges, start_node):
+        def tree(node, cost_so_far):
             node_info = nodes[node]
             node_name = node
             heuristic = node_info['cost']
@@ -63,7 +63,7 @@ def index():
             for edge, edge_cost in edges.items():
                 src, dest = edge.split('-')
                 if src == node:
-                    child_node = astar_tree(dest, cost_so_far + edge_cost)
+                    child_node = tree(dest, cost_so_far + edge_cost)
                     children.append(child_node)
 
             return {
@@ -72,11 +72,11 @@ def index():
                 "children": children
             }
 
-        return astar_tree(start_node, 0)
+        return tree(start_node, 0)
     
 
     start_node = "s"
-    solutionEdges = generate_astar_tree(nodes, edges, start_node)
+    solutionEdges = generate_tree(nodes, edges, start_node)
 
     def find_best_path(tree):
         if not tree["children"]:
