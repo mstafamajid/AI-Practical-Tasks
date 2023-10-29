@@ -3,85 +3,82 @@ class Graph:
         self.adjacency_list = adjacency_list
         self.heuristics = heuristics
 
-    def get_neighbors(self, v):
-        return self.adjacency_list[v]
+    def get_neighbors(self, node):
+        return self.adjacency_list[node]
 
-    def h(self, n):
-        return self.heuristics[n]
+    def heuristic_value(self, node):
+        return self.heuristics[node]
 
     def a_star_algorithm(self, start_node, stop_node):
-        open_list = set([start_node])
-        closed_list = set([])
+        open_set = set([start_node])
+        closed_set = set([])
 
-        g = {}
-        h_values = {}
+        g_score = {}  # Cost from start along the best path
+        f_score = {}  # Estimated total cost from start to goal
 
-        g[start_node] = 0
-        h_values[start_node] = self.heuristics[start_node]
+        g_score[start_node] = 0
+        f_score[start_node] = g_score[start_node] + self.heuristic_value(start_node)
 
-        parents = {}
-        parents[start_node] = start_node
+        came_from = {} # Dictionary to store parent nodes.
+        came_from[start_node] = start_node
 
-        while len(open_list) > 0:
-            n = None
+        while len(open_set) > 0:
+            current_node = None
 
-            for v in open_list:
-                if n is None or (g[v] + h_values[v]) < (g[n] + h_values[n]):
-                    n = v
+            # Find the node with the lowest estimated total cost (f_score).
+            for node in open_set:
+                if current_node is None or f_score[node] < f_score[current_node]:
+                    current_node = node
 
-            if n is None:
-                print('Path does not exist!')
-                return None
+            if current_node == stop_node:
+                path = []
+                while came_from[current_node] != current_node:
+                    g_value = g_score[current_node]
+                    h_value = self.heuristic_value(current_node)
+                    f_value = g_value + h_value
+                    path.append(f"{current_node} {g_value}-{h_value}-{f_value}")
+                    current_node = came_from[current_node]
 
-            if n == stop_node:
-                reconst_path = []
-                while parents[n] != n:
-                    reconst_path.append(f"{n} {g[n]}-{h_values[n]}-{g[n] + h_values[n]}")
-                    n = parents[n]
+                path.append(f"{start_node} 0-{self.heuristic_value(start_node)}-{self.heuristic_value(start_node)}")
+                path.reverse()
 
-                reconst_path.append(f"{start_node} 0-{h_values[start_node]}-{h_values[start_node]}")
-                reconst_path.reverse()
+                print('Path found:', path)
+                return path
 
-                print('Path found:', reconst_path)
-                return reconst_path
+            open_set.remove(current_node)
+            closed_set.add(current_node)
 
-            for (m, weight) in self.get_neighbors(n):
-                if m not in open_list and m not in closed_list:
-                    open_list.add(m)
-                    parents[m] = n
-                    g[m] = g[n] + weight
-                    h_values[m] = self.heuristics[m]
+            for (neighbor, weight) in self.get_neighbors(current_node):
+                tentative_g_score = g_score[current_node] + weight
 
-                else:
-                    if g[m] > g[n] + weight:
-                        g[m] = g[n] + weight
-                        parents[m] = n
+                if neighbor not in open_set and neighbor not in closed_set:
+                    open_set.add(neighbor)
+                elif tentative_g_score >= g_score.get(neighbor, float('inf')):
+                    continue
 
-                        if m in closed_list:
-                            closed_list.remove(m)
-                            open_list.add(m)
-
-            open_list.remove(n)
-            closed_list.add(n)
+                came_from[neighbor] = current_node
+                g_score[neighbor] = tentative_g_score
+                f_score[neighbor] = g_score[neighbor] + self.heuristic_value(neighbor)
 
         print('Path does not exist!')
         return None
-    
-adjacency_list = {
-    'S': [('A', 6), ('B', 6)],
-    'A': [('S', 6), ('C', 4)],
-    'B': [('S', 6), ('C', 4)],
-    'C': [('A', 4), ('B', 4),('G', 2)],
-    'G': [('C', 2)]
-}
 
-heuristics = {
-    'S': 4,
-    'A': 3,
-    'B': 2,
-    'C': 2,
-    'G': 0
-}
+# usage example
+# adjacency_list = {
+#     'S': [('A', 6), ('B', 6)],
+#     'A': [('S', 6), ('C', 4)],
+#     'B': [('S', 6), ('C', 4)],
+#     'C': [('A', 4), ('B', 4),('G', 2)],
+#     'G': [('C', 2)]
+# }
+
+# heuristics = {
+#     'S': 4,
+#     'A': 3,
+#     'B': 2,
+#     'C': 2,
+#     'G': 0
+# }
 
 # graph1 = Graph(adjacency_list, heuristics)
 # graph1.a_star_algorithm('S', 'G')

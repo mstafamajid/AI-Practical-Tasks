@@ -42,7 +42,7 @@ def index():
         chebyshev_distance = max(x_distance, y_distance)
     
         # Update the "cost" attribute for the node with the Chebyshev distance
-        nodes[node_name]["cost"] = chebyshev_distance
+        node_data["cost"] = chebyshev_distance
 
     # ==============================
     # Part 2: Generate Tree
@@ -77,6 +77,8 @@ def index():
     adjacency_list = {}
     heuristics = {}
 
+    # Converting the variables into desired inputs for our class
+    # Not for studying
     for node in nodes:
         node_name = node.upper()
         neighbors = []
