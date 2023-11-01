@@ -13,20 +13,59 @@ def getId():
 @app.route("/", methods=["GET"])
 def index():
     nodes = {
-        "s": {"row": 0, "col": 1, "cost": 99},
-        "a": {"row": 2, "col": 0, "cost": 99},
-        "b": {"row": 2, "col": 2, "cost": 99},
-        "c": {"row": 4, "col": 1, "cost": 99},
-        "g": {"row": 4, "col": 3, "cost": 99},
+        "s":{
+            "row":0,
+            "col":2,
+            "cost":99
+        },
+        "a":{
+            "row":2,
+            "col":0,
+            "cost":99
+        },
+        "b":{
+            "row":2,
+            "col":1,
+            "cost":99
+        },
+        "c":{
+            "row":2,
+            "col":3,
+            "cost":99
+        },
+        "e":{
+            "row":4,
+            "col":1,
+            "cost":99
+        },
+        "d":{
+            "row":4,
+            "col":2,
+            "cost":99
+        },
+        "f":{
+            "row":5,
+            "col":2,
+            "cost":99
+        },
+        "g":{
+            "row":6,
+            "col":0,
+            "cost":99
+        },
     }
 
-    # g(n)
     edges = {
         "s-a":6,
-        "s-b":6,
-        "a-c":4,
-        "b-c":4,
-        "c-g":2
+        "s-b":5,
+        "s-c":10,
+        "a-e":6,
+        "b-e":6,
+        "b-d":7,
+        "c-d":6,
+        "e-f":4,
+        "d-f":6,
+        "f-g":3
     }
 
     # ============================
@@ -42,7 +81,7 @@ def index():
         chebyshev_distance = max(x_distance, y_distance)
     
         # Update the "cost" attribute for the node with the Chebyshev distance
-        nodes[node_name]["cost"] = chebyshev_distance
+        node_data["cost"] = chebyshev_distance
 
     # ==============================
     # Part 2: Generate Tree
@@ -77,6 +116,8 @@ def index():
     adjacency_list = {}
     heuristics = {}
 
+    # Converting the variables into desired inputs for our class
+    # Not for studying
     for node in nodes:
         node_name = node.upper()
         neighbors = []
