@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sudoku Solver</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      /* Custom CSS to make the outside border and box separators bold */
+      .sudoku-board table {
+        border: 3px solid black;
+      }
+
+      .sudoku-board table tr:nth-child(3n) {
+        border-bottom: 3px solid black;
+      }
+
+      .sudoku-board table td:nth-child(3n) {
+        border-right: 3px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4">Sudoku Board</h1>
+      <div class="sudoku-board mt-4" style="max-width: 100%; overflow-x: auto">
+        {% if board %}
+        <table class="table table-bordered table-sm" style="width: 300px">
+          {% for row in board %}
+          <tr>
+            {% for cell in row %}
+            <td class="cell text-center" style="width: 30px; height: 30px">
+              {{ cell if cell != 0 else '' }}
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Sudoku board available.</p>
+        {% endif %}
+      </div>
+    </div>
+    <form method="post" action="/solve">
+      <input type="submit" value="Solve Sudoku" />
+    </form>
+
+    <!-- Display the solved Sudoku board here -->
+    <div class="container">
+      <h1 class="mt-4">Solved Sudoku Board</h1>
+
+      <div class="sudoku-board mt-4" style="max-width: 100%; overflow-x: auto">
+        <table class="table table-bordered table-sm" style="width: 300px">
+          {% for row in solved_board %}
+          <tr>
+            {% for cell in row %}
+            <td class="cell text-center" style="width: 30px; height: 30px">
+              {{ cell if cell != 0 else '' }}
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
