@@ -4,10 +4,6 @@ from vacuum_board.vacuum import board, get_board, set_board, get_random_board, m
 
 
 
-
-# we will this function for test
-# set_board(get_random_board())
-
 set_board([4, 33, [3,2,7,9,22]])
 
 board_thread = threading.Thread(target=board)
