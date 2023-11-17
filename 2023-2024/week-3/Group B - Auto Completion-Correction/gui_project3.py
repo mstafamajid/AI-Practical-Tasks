@@ -90,7 +90,7 @@ def submit():
 
     frame3 = Frame(window2)
     table = Text(frame3, wrap=CHAR,  bg="black", fg="white")
-    table.config(font=5)
+    table.config(font=15)
     table.tag_config('center', justify='center')
     table.insert(INSERT, f"The number of matcher words are {word[4][::-1]}")
     table.pack()
@@ -103,7 +103,7 @@ def submit():
 
 def create_text_widget(frame, row, column, width, height, text, bg, fg):
     table = Text(frame, width=width, height=height, bg=bg, fg=fg)
-    table.config(font=5)
+    table.config(font=15)
     table.tag_config('center', justify='center')
     table.grid(row=row, column=column)
     table.insert(INSERT, text)
@@ -131,17 +131,19 @@ def check():
             frame,
             text=match_values[loop][2],
             command=lambda word_prop=match_values[loop]: words(word_prop),
+            font=15
         )
         array_of_buttons[loop].grid(row=2 + loop, column=0, pady=4)
 
     # Add the "Submit" button back to the frame
-    submit_button = Button(frame, text="Submit", command=submit)
+    submit_button = Button(frame, text="Submit", command=submit, font=15)
     submit_button.grid(row=0, column=0, pady=4)
 
 check_button = Button(
     frame,
     text="Check",
-    command=check
+    command=check,
+    font=15
 )
 check_button.grid(row=1, column=0, pady=4)
 
