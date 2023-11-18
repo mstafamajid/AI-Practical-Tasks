@@ -66,7 +66,6 @@ the app should give statistical UI with some demonstration on a board where the 
 ## Requirements:
 - data particle dots are placed on the board
 - each data particle has a color according toi the cluster it belongs to
-- try give the user the ability to enter the first cluster centers manually
 - feel free to use any language/library for UI or Actual code
 - no library should be used for implementing KNN formula, you can use any language you want like ( php, node, c# ..etc )
 
