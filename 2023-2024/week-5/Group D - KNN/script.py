@@ -30,6 +30,10 @@ def predict_class(distances, classes, k):
     """
     Predicts the class for a given test sample using KNN based on average distances.
     """
+    
+    #   [3,4,1,5,2]
+    #  0,1,2,3,4 index 
+#      2,4,0,1,3 index 
     sorted_indices = np.argsort(distances)
     k_nearest_classes = classes[sorted_indices[:k]]
     k_nearest_distances = distances[sorted_indices[:k]]
@@ -53,18 +57,18 @@ def predict_class(distances, classes, k):
     return predicted_class
 
 
-def knn(features, labels, k, x_test, metric):
+def knn(features, classes, k, x_test, metric):
     """
     Performs KNN classification on a test sample x_test.
     """
     distances = [metric(x_test, x) for x in features]
     distances = np.array(distances)
-    return predict_class(distances, labels, k)
+    return predict_class(distances, classes, k)
 
 
 # GUI function to perform KNN based on user inputs
 def perform_knn():
-    # Get user inputs from the Entry widgets
+    # Get user inputs from the Entrclasseswidgets
     k_value = int(entry_k.get())
     num_classes = int(entry_num_classes.get())
     selected_metric_str = metrics.get()
@@ -76,27 +80,26 @@ def perform_knn():
         selected_metric = calculate_manhattan_distance
     elif selected_metric_str == "Chebyshev Distance":
         selected_metric = calculate_chebyshev_distance
-    
 
     # Get user input for test sample coordinates (x_test)
     x_test_input = entry_x_test.get().split(",")
     x_test = np.array([float(coord.strip()) for coord in x_test_input])
 
     # Generate synthetic classification data based on user input for number of classes
-    features, y = make_blobs(
-        n_samples=400, centers=num_classes, n_features=2, cluster_std=1, random_state=42
+    features, classes= make_blobs(
+        n_samples=2000, centers=num_classes, n_features=2, cluster_std=1
     )
 
     # Predict the class for the user-input test sample using the selected metric and KNN
-    predicted_class = knn(features, y, k_value, x_test, selected_metric)
+    predicted_class = knn(features, classes, k_value, x_test, selected_metric)
     print(f"Predicted class for x_test: {predicted_class}")
 
     # Plot the scatter plot with the test sample and predicted class
     cmap = colormaps["Set1"]
     for class_idx in range(num_classes):
         plt.scatter(
-            features[y == class_idx, 0],
-            features[y == class_idx, 1],
+            features[classes== class_idx, 0],
+            features[classes== class_idx, 1],
             color=cmap(class_idx),
             label=f"Class {class_idx}",
             marker="o",
@@ -121,7 +124,7 @@ root = tk.Tk()
 root.title("KNN Classifier")
 root.geometry("400x300")  # Set initial window size
 
-# Entry widgets for k value, number of classes, distance metric, and x_test coordinates
+# Entrclasseswidgets for k value, number of classes, distance metric, and x_test coordinates
 label_k = tk.Label(root, text="Enter value of 'k':")
 label_k.pack()
 entry_k = tk.Entry(root)
