@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./bayesian_classifier.js"></script>
+    <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <title>Dynamic Bayesian Classifier</title>
+</head>
+<body>
+
+    <div class="left-side">
+        <div class="lft-btns">
+            <div class="file-input">
+                <input type="file" id="input" class="input">
+                <label for="input">Select file</label>
+              </div>
+            <button onclick="exportTableToExcel('tobedownloaded', 'tableData')" class="button" role="button">Download</button>
+        </div>
+
+        <div class="calculated-table" id="calculated-table">
+            <!-- added using javascript -->
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="rt-btns">
+            <button class="button" role="button" id="check-btn">Check</button>
+        </div>
+
+        <div class="labels" id="labels">
+            <!-- added using javascript -->
+        </div>
+
+        <div class="result">
+            <div class="result-box">
+                <p>Final Result</p>
+                <p class="result-value" id="result-value"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function exportTableToExcel(tableId, filename = ''){
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableId);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+            // Specify file name
+            filename = filename ? filename + '.xls' : 'excel_data.xls';
+    
+            // Create download link element
+            downloadLink = document.createElement("a");
+    
+            document.body.appendChild(downloadLink);
+    
+            if(navigator.msSaveOrOpenBlob){
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob( blob, filename);
+            }else{
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+                // Setting the file name
+                downloadLink.download = filename;
+    
+                // Triggering the function
+                downloadLink.click();
+            }
+        }
+    </script>
+</body>
+</html>
