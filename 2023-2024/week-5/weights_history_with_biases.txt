@@ -1,0 +1,150 @@
+Epoch 0:
+Weights Input Hidden:
+[[-0.25240617  0.90011103]
+ [ 0.46259545  0.19557218]]
+
+Biases Hidden:
+[[-0.00261237 -0.00255095]]
+
+Weights Hidden Output:
+[[-0.67945958]
+ [-0.67759721]]
+
+Biases Output:
+[[0.01611856]]
+
+Epoch 1000:
+Weights Input Hidden:
+[[-0.28709131  0.83397382]
+ [ 0.44840156 -0.03484941]]
+
+Biases Hidden:
+[[ 0.02538717 -0.07253884]]
+
+Weights Hidden Output:
+[[-0.45688147]
+ [-0.33443487]]
+
+Biases Output:
+[[0.43418773]]
+
+Epoch 2000:
+Weights Input Hidden:
+[[-0.31407847  0.84996426]
+ [ 0.49520905 -0.1607904 ]]
+
+Biases Hidden:
+[[ 0.12040616 -0.03448769]]
+
+Weights Hidden Output:
+[[-0.46630025]
+ [-0.33031526]]
+
+Biases Output:
+[[0.44578768]]
+
+Epoch 3000:
+Weights Input Hidden:
+[[-0.38039636  0.90696363]
+ [ 0.58560929 -0.28050762]]
+
+Biases Hidden:
+[[0.23896481 0.05005784]]
+
+Weights Hidden Output:
+[[-0.49299489]
+ [-0.36302613]]
+
+Biases Output:
+[[0.49664958]]
+
+Epoch 4000:
+Weights Input Hidden:
+[[-0.52721839  1.03728346]
+ [ 0.76917617 -0.45017248]]
+
+Biases Hidden:
+[[0.41686536 0.20887859]]
+
+Weights Hidden Output:
+[[-0.5699396 ]
+ [-0.45734489]]
+
+Biases Output:
+[[0.62937223]]
+
+Epoch 5000:
+Weights Input Hidden:
+[[-0.92762603  1.38959819]
+ [ 1.22613636 -0.83532878]]
+
+Biases Hidden:
+[[0.74873843 0.54224206]]
+
+Weights Hidden Output:
+[[-0.8325425 ]
+ [-0.73415334]]
+
+Biases Output:
+[[1.03783345]]
+
+Epoch 6000:
+Weights Input Hidden:
+[[-2.25307571  2.53126504]
+ [ 2.53040724 -2.11690461]]
+
+Biases Hidden:
+[[1.3842102  1.23190141]]
+
+Weights Hidden Output:
+[[-1.87630667]
+ [-1.79027082]]
+
+Biases Output:
+[[2.57437858]]
+
+Epoch 7000:
+Weights Input Hidden:
+[[-3.84722261  4.03500546]
+ [ 4.05646548 -3.76202914]]
+
+Biases Hidden:
+[[2.04888329 1.97359627]]
+
+Weights Hidden Output:
+[[-3.56637919]
+ [-3.55647086]]
+
+Biases Output:
+[[5.12040652]]
+
+Epoch 8000:
+Weights Input Hidden:
+[[-4.5622091   4.73742511]
+ [ 4.75597378 -4.50066938]]
+
+Biases Hidden:
+[[2.37162333 2.3229244 ]]
+
+Weights Hidden Output:
+[[-4.55833351]
+ [-4.55948641]]
+
+Biases Output:
+[[6.61652373]]
+
+Epoch 9000:
+Weights Input Hidden:
+[[-4.92928495  5.10188552]
+ [ 5.11897134 -4.87797339]]
+
+Biases Hidden:
+[[2.54221247 2.50341098]]
+
+Weights Hidden Output:
+[[-5.13630737]
+ [-5.13907556]]
+
+Biases Output:
+[[7.48774243]]
+
