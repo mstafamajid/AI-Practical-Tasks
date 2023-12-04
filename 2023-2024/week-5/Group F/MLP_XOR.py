@@ -13,12 +13,20 @@ def sigmoid_derivative(x):
 
 # Initialize random weights and biases for the network
 def initialize_weights_and_biases(input_size, hidden_size, output_size):
-    np.random.seed(42)  #effect on the weights and will generate random number
     weights_input_hidden = 2 * np.random.random((input_size, hidden_size)) - 1
     biases_hidden = np.zeros((1, hidden_size))
     weights_hidden_output = 2 * np.random.random((hidden_size, output_size)) - 1
     biases_output = np.zeros((1, output_size))
     return weights_input_hidden, biases_hidden, weights_hidden_output, biases_output
+
+# Calculate accuracy
+def calculate_accuracy(predictions, targets):
+    predictions = (predictions >= 0.5).astype(int)  # Thresholding for binary classification
+    correct = np.sum(predictions == targets)
+    total = targets.size
+    accuracy = correct / total
+    return accuracy * 100  # Return percentage
+
 
 # Forward pass through the network
 def forward_pass(inputs, weights_input_hidden, biases_hidden, weights_hidden_output, biases_output):
@@ -31,14 +39,12 @@ def forward_pass(inputs, weights_input_hidden, biases_hidden, weights_hidden_out
     return hidden_layer_output, output_layer_output
 
 # Backpropagation to update weights and biases
-def backpropagation(inputs, expected_output, hidden_layer_output, output_layer_output, 
+def backpropagation(inputs, given_output, hidden_layer_output, output_layer_output, 
                     weights_input_hidden, biases_hidden, weights_hidden_output, biases_output, learning_rate):
-    output_error = expected_output - output_layer_output
+    output_error = given_output - output_layer_output
     output_delta =  output_error * sigmoid_derivative(output_layer_output)
-    print(f"output error===========, {output_error}")
     hidden_error = output_delta.dot(weights_hidden_output.T)
     hidden_delta = hidden_error * sigmoid_derivative(hidden_layer_output)
-    print(f"hidden error++++++++ {hidden_error}")
     weights_hidden_output += hidden_layer_output.T.dot(output_delta) * learning_rate
     biases_output += np.sum(output_delta, axis=0, keepdims=True) * learning_rate
     weights_input_hidden += inputs.T.dot(hidden_delta) * learning_rate
@@ -56,7 +62,7 @@ class Plotter:
         self.weights_hidden_output = weights_hidden_output
         self.biases_output = biases_output
 
-        self.figure, self.ax = plt.subplots(figsize=(8, 6))
+        self.figure, self.ax = plt.subplots(figsize=(6,4))
         self.canvas = FigureCanvasTkAgg(self.figure, master=master)
         self.canvas.get_tk_widget().pack()
 
@@ -80,10 +86,10 @@ class Plotter:
         self.ax.contour(xx, yy, Z, levels=[0.5], colors='black', linestyles='dashed')
 
         self.ax.set_title(f'Decision Boundary (Epoch {epoch})')
-        self.ax.set_xlabel('Feature 1')
-        self.ax.set_ylabel('Feature 2')
-
+        self.ax.set_xlabel('F1')
+        self.ax.set_ylabel('F2')
         self.canvas.draw()
+        
 
         # Save weights and biases to history
         self.weights_history += f"Epoch {epoch}:\n"
@@ -106,8 +112,8 @@ def train_with_gui_and_save_weights_to_txt(X, y, hidden_size, epochs, learning_r
     root.title("Neural Network Decision Boundary")
 
     # Create Plotter instance
-    plotter = Plotter(root, X, y, weights_input_hidden, biases_hidden, 
-                      weights_hidden_output, biases_output, save_file)
+    plotter = Plotter(root, X, y, weights_input_hidden, biases_hidden,
+                    weights_hidden_output, biases_output, save_file)
 
     for epoch in range(epochs):
         # Forward pass
@@ -115,6 +121,7 @@ def train_with_gui_and_save_weights_to_txt(X, y, hidden_size, epochs, learning_r
             X, weights_input_hidden, biases_hidden, weights_hidden_output, biases_output
         )
 
+        
         # Backpropagation
         backpropagation(
             X, y, hidden_layer_output, output_layer_output,
@@ -122,16 +129,32 @@ def train_with_gui_and_save_weights_to_txt(X, y, hidden_size, epochs, learning_r
             weights_hidden_output, biases_output,
             learning_rate
         )
+        predictions = forward_pass(X, weights_input_hidden, biases_hidden, weights_hidden_output, biases_output)[1]
+        accuracy = calculate_accuracy(predictions, y)
+        
 
-        # Update the plot every 1000 epochs
-        if epoch % 1000 == 0:
+        # Update the plot every 100 epochs
+        if epoch % 100 == 0:
             plotter.plot_decision_boundary(epoch)
             root.update_idletasks()
             root.update()
+            
+            if accuracy >= 99.9:
+                print(f"Training stopped at Epoch {epoch} as accuracy reached 100%.")
+                break
 
     # Save weights and biases to a text file
     with open(f"{save_file}.txt", 'w') as f:
         f.write(plotter.weights_history)
+
+
+    # Print final accuracy and weights
+    print(f"Final Accuracy: {accuracy:.2f}%")
+    print("Final Weights:")
+    print(f"Weights Input Hidden:\n{weights_input_hidden}\n")
+    print(f"Biases Hidden:\n{biases_hidden}\n")
+    print(f"Weights Hidden Output:\n{weights_hidden_output}\n")
+    print(f"Biases Output:\n{biases_output}\n")
 
     # Pause at the final result
     root.mainloop()
@@ -149,7 +172,7 @@ y = np.array([[0],
 
 # Set hyperparameters
 hidden_size = 2
-epochs = 10000
+epochs = 15000
 
 learning_rate = 0.1
 save_file = "weights_history_with_biases"
