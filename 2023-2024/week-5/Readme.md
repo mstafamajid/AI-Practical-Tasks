@@ -52,7 +52,7 @@ the app will save each iteration table in a file
 # 4 SVM Model
 train SVM model on iris dataset, the app will train the model 3 times showing the difference kernel works in each model ( RBF, Linear, Polynomial) kernels
 
-at the GUI for each kernel show/highlight support vectors and separation line and margin lines
+at the GUI for each kernel show support vectors and separation line and margin lines
 
 show the model accuracy
 
@@ -60,7 +60,7 @@ show the model accuracy
 - train svm with 3 different kernels ( RBF, Linear, Polynomial) and know their difference
 - use iris dataset in Sklearn 
 - use 2 dimensions for each data (for simplicity)
-- show/highlight support vector machines
+- show support vector
 - show separation lines
 - show margin lines
 - use Sklearn in Python for SVM
@@ -83,7 +83,7 @@ show the model accuracy
 # 6 KMeans clustering
 Cluster the Iris dataset using KMeans clustering.
 
-Cluster the data 3 times using three different methods ( Euclidean distance, cosine distance and manhattan distance).
+Cluster the data 3 times using three different metrics ( Euclidean distance, cosine distance and manhattan distance).
 
 plot each KMeans result to a scatter plot GUI, give each cluster a different color.
 
@@ -92,6 +92,6 @@ show the model accuracy
 ## requirements
 - use iris dataset in Sklearn
 - use Sklearn in Python for KMeans
-- use three different methods ( Euclidean distance, cosine distance and manhattan distance)
+- use three different metrics ( Euclidean distance, cosine distance and manhattan distance)
 - show scatter plot for each method with coloring each cluster in a different color
 - show the model accuracy
