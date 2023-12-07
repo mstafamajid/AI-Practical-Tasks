@@ -28,9 +28,9 @@
 
 [Dataset to use](https://www.kaggle.com/datasets/asaniczka/mammals-image-classification-dataset-45-animals)
 
-# D- Final Project (20 Marks): Digit Recognizer
+# D- Final Project (20 Marks): Mango leaf Disease
 
- - Utilize neural network, kNN, Bayesian and SVM classifiers to determine whether an animal's condition is dangerous or not based on five distinct symptoms. from the provided dataset.
+ - Utilize neural network, kNN, Bayesian and SVM classifiers to determine whether a leaf  has a specific disease or not. from the provided dataset.
  - Identify and assess the most effective features to enhance the accuracy of the classification task.
  - Conduct a comparative analysis of the results obtained from all models, providing a rationale for the analysis.
  - Present your work in few slides in addition to no more than two pages report.
