@@ -55,4 +55,4 @@
  - Present your work in few slides in addition to no more than two pages report.
  - Each Student will be asked around five major questions regarding the written report, the presented slide and/or the Code.
 
-[Dataset to use](https://www.kaggle.com/datasets/piyushborhade/diabetes-dataset/code)
+[Dataset to use](https://www.kaggle.com/datasets/piyushborhade/diabetes-dataset/data)
