@@ -12,7 +12,6 @@ data = pd.DataFrame(data=np.c_[iris['data'], iris['target']],
 # Predict Sepal Width based on Sepal Length
 sepal_length = data[['sepal length (cm)']]
 sepal_width = data[['sepal width (cm)']]
-150
 
 
 # Split the data into training and testing sets
