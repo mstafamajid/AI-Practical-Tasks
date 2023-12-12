@@ -6,13 +6,15 @@ from sklearn.metrics import r2_score
 # Load the Iris dataset
 from sklearn.datasets import load_iris
 iris = load_iris()
-data = pd.DataFrame(data=np.c_[iris['data'], iris['target']],
-                    columns=iris['feature_names'] + ['target'])
+
+data = pd.DataFrame(data=np.c_[iris['data']],
+                    columns=iris['feature_names'])
 
 # Predict Sepal Width based on Sepal Length
+
+
 sepal_length = data[['sepal length (cm)']]
 sepal_width = data[['sepal width (cm)']]
-
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
@@ -22,11 +24,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 model_sepal_width = LinearRegression()
 
 model_sepal_width.fit(X_train, y_train)
-
 # Make predictions on the test data
 y_pred_sepal_width = model_sepal_width.predict(X_test)
-
-
 # Evaluate the model for Sepal Width prediction
 r2_sepal_width = r2_score(y_test, y_pred_sepal_width)
 print(
@@ -35,7 +34,7 @@ print(
 
 # Predict Petal Length based on Sepal Length and Sepal Width
 sepal_length_width = data[['sepal length (cm)', 'sepal width (cm)']]
-print(sepal_length_width.shape)
+
 petal_length = data['petal length (cm)']
 
 # Split the data into training and testing sets
