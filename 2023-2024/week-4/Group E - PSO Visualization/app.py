@@ -91,8 +91,8 @@ class PSOApp:
         self.c1_entry.insert(0, "2")
         self.c2_entry.insert(0, "2")
         self.num_particles_entry.insert(0, "35")
-        self.goal_x_entry.insert(0, "850")
-        self.goal_y_entry.insert(0, "550")
+        self.goal_x_entry.insert(0, "700")
+        self.goal_y_entry.insert(0, "450")
 
         # Canvas for drawing
         self.canvas = tk.Canvas(master, width=960, height=640, bg="white")
